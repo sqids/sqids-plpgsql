@@ -18,20 +18,15 @@ After install, use encode & decode:
 
 encode takes an array of BIGINT, an alphabet, and an optional minLength.
 
-postgres=# select sqids.encode(array[123, 456, 789], 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 12);
-    encode    
---------------
- EBDQWDLPCTHG
-(1 row)
+select sqids.encode(array[123, 456, 789], 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 12);
+
+EBDQWDLPCTHG
 
 decode requires the id and alphabet. It returns an array of BIGINT.
 
-postgres=# select sqids.decode('EBDQWDLPCTHG', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
-    decode     
----------------
- {123,456,789}
-(1 row)
+select sqids.decode('EBDQWDLPCTHG', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
 
+{123,456,789}
 
 ## License
 
