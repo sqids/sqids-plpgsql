@@ -315,6 +315,12 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION sqids.encode(numbers BIGINT[], minLength INT) RETURNS TEXT AS $$
+BEGIN
+  RETURN sqids.encode(numbers, 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', minLength);
+END;
+$$ LANGUAGE plpgsql;
+
 CREATE OR REPLACE FUNCTION sqids.defaultBlocklist() RETURNS VOID AS $$
 BEGIN
   --raise notice 'inserting default blocklist';

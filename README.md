@@ -58,6 +58,24 @@ decode requires the id and alphabet. It returns an array of BIGINT.
 select sqids.decode('EBDQWDLPCTHG', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'); -- {123,456,789}
 ```
 
+### With default alphabet & min length (0)
+
+```sql
+select sqids.encode(array[123, 456, 789]); --eVH6til6J
+```
+
+### With default alphabet & custom min length
+
+```sql
+select sqids.encode(array[123, 456, 789], 12); --eVH6til6J03E
+```
+
+### Decode with default alphabet
+
+```sql
+select sqids.decode('eVH6til6J03E'); -- {123,456,789}
+```
+
 ## 🧪 Testing
 
 Run the sql files in tests dir to install.
