@@ -170,13 +170,13 @@ BEGIN
   a := array_length(numbers, 1);
   --raise notice 'Offset start: %', a;
   FOR i IN 0..(array_length(numbers, 1) - 1) LOOP
-    v:= numbers[i + 1];
+    v := numbers[i + 1];
     --raise notice 'avi: % % %', a, v, i;
     m := v % array_length(arr_alphabet, 1);
     --raise notice 'm: %', m;
     char :=  ascii(arr_alphabet[m + 1]);
     --raise notice 'char: %', char;
-    a:= char + i + a;
+    a := char + i + a;
     --raise notice 'a: %', a;
   END LOOP;
   offset_var := a % array_length(arr_alphabet, 1);
