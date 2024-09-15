@@ -5,3 +5,6 @@
 
 ## V0.2
 -Added spec tests & fixed any failures
+
+## V0.2.1
+-Marked functions as immutable
