@@ -31,7 +31,7 @@ BEGIN
   --raise notice 'Shuffled alphabet: %', array_to_string(chars, '');
   RETURN array_to_string(chars, '');
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql IMMUTABLE;
 
 CREATE OR REPLACE FUNCTION sqids.checkAlphabet(alphabet TEXT) RETURNS BOOLEAN AS $$
 DECLARE
@@ -58,7 +58,7 @@ BEGIN
 
   RETURN TRUE;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql IMMUTABLE;
 
 CREATE OR REPLACE FUNCTION sqids.isBlockedId(id TEXT) RETURNS BOOLEAN AS $$
 DECLARE
@@ -112,7 +112,7 @@ BEGIN
   --raise notice 'toId result: %', array_to_string(id, '');
   RETURN array_to_string(id, '');
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql IMMUTABLE;
 
 CREATE OR REPLACE FUNCTION sqids.toNumber(id TEXT, alphabet TEXT) RETURNS BIGINT AS $$
 DECLARE
@@ -139,7 +139,7 @@ BEGIN
   --raise notice 'tonumber result: %', result;
   RETURN result;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql IMMUTABLE;
 
 CREATE OR REPLACE FUNCTION sqids.encodeNumbers(numbers BIGINT[], alphabet TEXT, minLength INT, increment INT DEFAULT 0) RETURNS TEXT AS $$
 DECLARE
@@ -231,7 +231,7 @@ BEGIN
 
   RETURN id;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql IMMUTABLE;
 
 
 CREATE OR REPLACE FUNCTION sqids.decode(id TEXT, alphabet TEXT DEFAULT 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789') RETURNS BIGINT[] AS $$
@@ -301,7 +301,7 @@ BEGIN
 
   RETURN ret;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql IMMUTABLE;
 
 CREATE OR REPLACE FUNCTION sqids.encode(numbers BIGINT[], alphabet TEXT DEFAULT 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', minLength INT DEFAULT 0) RETURNS TEXT AS $$
 DECLARE
@@ -313,13 +313,13 @@ BEGIN
   id := sqids.encodeNumbers(numbers, alphabet, minLength);
   RETURN id;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql IMMUTABLE;
 
 CREATE OR REPLACE FUNCTION sqids.encode(numbers BIGINT[], minLength INT) RETURNS TEXT AS $$
 BEGIN
   RETURN sqids.encode(numbers, 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', minLength);
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql IMMUTABLE;
 
 CREATE OR REPLACE FUNCTION sqids.defaultBlocklist() RETURNS VOID AS $$
 BEGIN
