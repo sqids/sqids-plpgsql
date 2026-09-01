@@ -143,5 +143,29 @@ BEGIN
     RAISE NOTICE '  FAILED';
   END IF;
 
+  RAISE NOTICE 'negative numbers raise';
+  BEGIN
+    PERFORM sqids.encode(array[1, 2, 4, -1]);
+    RAISE NOTICE '  FAILED';
+  EXCEPTION WHEN others THEN
+    IF SQLERRM LIKE 'Sqids: numbers must be non-negative%' THEN
+      RAISE NOTICE '  PASSED';
+    ELSE
+      RAISE NOTICE '  FAILED; %', SQLERRM;
+    END IF;
+  END;
+
+  RAISE NOTICE 'NULL numbers raise';
+  BEGIN
+    PERFORM sqids.encode(ARRAY[1, NULL]::BIGINT[]);
+    RAISE NOTICE '  FAILED';
+  EXCEPTION WHEN others THEN
+    IF SQLERRM LIKE 'Sqids: numbers must be non-negative%' THEN
+      RAISE NOTICE '  PASSED';
+    ELSE
+      RAISE NOTICE '  FAILED; %', SQLERRM;
+    END IF;
+  END;
+
 END
 $$ LANGUAGE plpgsql;
